@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reactSQL">
+    <select id="faqList">
+        select 
+            *
+        from bby_interview
+        <if test=" id != null and id !='' ">
+        where id = #{id}
+        </if>
+        order by id desc
+    </select> 
+    <insert id="faqInsert">
+        insert into 
+            bby_faq (
+                subject                
+                , content 
+            )
+            values (
+                #{wr_subject}
+                , #{wr_content}
+            )
+    </insert>
+    <update id="faqUpdate">
+         update 
+            bby_faq 
+         set 
+         <if test=" wr_subject != null and wr_subject !='' ">
+            subject = #{wr_subject}
+         </if>
+         <if test=" wr_content != null and wr_content !='' ">
+           , content = #{wr_content} 
+         </if>
+            where id = #{id}
+    </update>
+    <delete id="faqDelete">
+        delete from 
+            bby_faq 
+        where id = #{id}
+    </delete>
+</mapper>
